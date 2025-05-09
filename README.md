@@ -4,9 +4,9 @@
 
 ## Actually Secure Encryption (ASE)
 
-**dart-ASE** is a playful proof‑of‑concept library implementing a hybrid lattice‑based KEM + AES‑GCM scheme in pure Dart.
+**dart-ASE** is a proof‑of‑concept library implementing a hybrid lattice‑based KEM + AES‑GCM scheme in pure Dart.
 
-> **Warning:** This code has _never_ been audited by professional cryptographers or security experts. **Do not** use in production or for securing real data!
+> **Warning:** This code has _never_ been audited by professional cryptographers or security experts. **Not recommended** for use in production or for securing real data!
 
 ---
 
