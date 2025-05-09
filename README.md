@@ -1,6 +1,6 @@
 # dart-ASE 🚀🔒
 
-[![Dart](https://img.shields.io/badge/Dart-2.19-blue.svg)](https://dart.dev/) [![License](https://img.shields.io/badge/License-GPL-green.svg)](LICENSE)
+[![Dart](https://img.shields.io/badge/Dart-3.6.1-blue.svg)](https://dart.dev/) [![License](https://img.shields.io/badge/License-GPL-green.svg)](LICENSE)
 
 ## Actually Secure Encryption (ASE)
 
