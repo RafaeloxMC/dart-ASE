@@ -1,0 +1,10 @@
+name: enc
+description: A Dart package for encryption functionalities.
+version: 1.0.0
+
+environment:
+    sdk: ">=2.19.0 <3.0.0"
+
+dependencies:
+    crypto: ^3.0.6
+    cryptography: ^2.7.0
