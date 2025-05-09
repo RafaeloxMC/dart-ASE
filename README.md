@@ -98,7 +98,7 @@
 
 > **This library is (probably) _not_ production‑safe.**
 > No security experts or cryptographers have reviewed or audited this implementation.
-> Use this code for learning and experimentation only—**never** for real-world confidentiality.
+> Use this code for learning and experimentation only — **never** for real-world confidentiality.
 
 ---
 
