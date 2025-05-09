@@ -85,9 +85,7 @@
     - Decapsulation recovers $\mathbf{r}$ from $\mathbf{u},\mathbf{v}$.
     - Derive a symmetric key via HKDF‑SHA256:
 
-        $$
-          \mathrm{AES\_Key} = \mathrm{HKDF}(\mathbf{r}\,\|\,\text{"AES-GCM key"})
-        $$
+        $$\mathrm{AES\_Key} = \mathrm{HKDF}(\mathbf{r}\|\text{"AES-GCM key"})$$
 
 4. **AES‑GCM AEAD**
 
