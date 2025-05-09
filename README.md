@@ -45,9 +45,77 @@
     dart pub get
     ```
 
-2. **CLI Usage**
+2. **Generate a key pair**
+
     ```bash
-    dart run main.dart gen # -> pubkey.json & privkey.json
-    dart run main.dart enc pubkey.json "Hello World" # -> ciphertext.json
-    dart run main.dart dec privkey.json ciphertext.json # -> Hello World
+    dart run main_secure.dart gen
+    # → pubkey.json & privkey.json
     ```
+
+3. **Encrypt a message**
+
+    ```bash
+    dart run main_secure.dart enc pubkey.json "Hello, ASE is cool!"
+    # → ciphertext.json
+    ```
+
+4. **Decrypt the message**
+
+    ```bash
+    dart run main_secure.dart dec privkey.json ciphertext.json
+    # → prints: Hello, ASE is cool!
+    ```
+
+---
+
+## 🔍 How It Works
+
+1. **KEM KeyGen**
+
+    - Generate public matrix $A\in R_q^{k\times k}$ and secret vector $\mathbf{s}\in R_q^k$.
+    - Compute $\mathbf{b} = A\mathbf{s} + \mathbf{e}$ with small error $\mathbf{e}$.
+
+2. **KEM Encapsulation**
+
+    - Sample ephemeral $\mathbf{r}\in R_q^k$ and noise $\mathbf{e}_1,\mathbf{e}_2$.
+    - Compute $\mathbf{u} = A^T\mathbf{r} + \mathbf{e}_1$ and encode message bits into $\mathbf{v}$.
+
+3. **Shared Secret**
+
+    - Decapsulation recovers $\mathbf{r}$ from $\mathbf{u},\mathbf{v}$.
+    - Derive a symmetric key via HKDF‑SHA256:
+
+        $$
+          \mathrm{AES\_Key} = \mathrm{HKDF}(\mathbf{r}\,\|\,\text{"AES-GCM key"})
+        $$
+
+4. **AES‑GCM AEAD**
+
+    - Encrypt arbitrary plaintext under the derived 256‑bit key.
+    - Outputs AEAD ciphertext + 128‑bit MAC.
+
+---
+
+## ⚠️ Security Disclaimer
+
+> **This library is (probably) _not_ production‑safe.**
+> No security experts or cryptographers have reviewed or audited this implementation.
+> Use this code for learning and experimentation only—**never** for real-world confidentiality.
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repo
+2. Create your feature branch (`git checkout -b feature/XYZ`)
+3. Commit your changes (`git commit -m "Add XYZ"`)
+4. Push to the branch (`git push origin feature/XYZ`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the [GNU General Public License v3](LICENSE).
+
+---
