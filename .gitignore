@@ -1,2 +1,4 @@
 *.json
 *.lock
+*.exe
+*.js**

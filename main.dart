@@ -282,12 +282,17 @@ Future<void> main(List<String> args) async {
   }
 }
 
-void _usage() => print('''
+void _usage() {
+  final scriptName = Platform.script.pathSegments.last;
+  final dartPrefix = scriptName.endsWith('.dart') ? "dart run " : "";
+  print('''
 Usage:
-  dart run main_secure.dart gen
+  $dartPrefix$scriptName gen
     → writes pubkey.json & privkey.json
-  dart run main_secure.dart enc pubkey.json "Your message"
+
+  $dartPrefix$scriptName enc pubkey.json "Your message"
     → writes ciphertext.json
-  dart run main_secure.dart dec privkey.json ciphertext.json
-    → prints decrypted message
-''');
+
+  $dartPrefix$scriptName dec privkey.json ciphertext.json
+    → prints decrypted message''');
+}
