@@ -1,4 +1,4 @@
-name: dart-ASE
+name: dart_ASE
 description: A Dart package for quantum-secure encryption functionalities.
 version: 1.0.0
 
@@ -7,3 +7,6 @@ environment:
 
 dependencies:
     cryptography: ^2.7.0
+
+dev_dependencies:
+    test: ^1.26.2
