@@ -1,8 +1,15 @@
 import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:dart_ase/src/constants.dart';
+import 'package:dart_ase/src/hybrid/hybrid_pke.dart';
+import 'package:dart_ase/src/io/deserialize.dart';
+import 'package:dart_ase/src/io/serialize.dart';
+import 'package:dart_ase/src/kem/kem.dart';
+import 'package:dart_ase/src/poly/polynominal.dart';
+import 'package:dart_ase/src/poly/polyvec.dart';
+import 'package:dart_ase/src/utils/hkdf_aes.dart';
 import 'package:test/test.dart';
-import '../main.dart';
 import 'dart:math' as math;
 
 var _rnd = math.Random.secure();
@@ -231,7 +238,7 @@ void main() {
       final kemCt = kemEncap(kp.pk, r);
 
       log('Creating combined cipher with KEM and symmetric components');
-      final cc = CombinedCipher(
+      final cc = ASECombinedCipher(
         kemCt,
         Uint8List.fromList(List.filled(12, 1)), // nonce
         Uint8List.fromList(List.filled(32, 2)), // ciphertext

@@ -35,7 +35,7 @@
 
 ---
 
-## 💻 Quickstart
+## 💻 Quickstart (with CLI)
 
 1. **Clone & install**
 
@@ -48,22 +48,111 @@
 2. **Generate a key pair**
 
     ```bash
-    dart run main_secure.dart gen
+    dart run dart_ase gen
     # → pubkey.json & privkey.json
     ```
 
 3. **Encrypt a message**
 
     ```bash
-    dart run main_secure.dart enc pubkey.json "Hello, ASE is cool!"
+    dart run dart_ase enc pubkey.json "Hello, ASE is cool!"
     # → ciphertext.json
     ```
 
 4. **Decrypt the message**
 
     ```bash
-    dart run main_secure.dart dec privkey.json ciphertext.json
+    dart run dart_ase dec privkey.json ciphertext.json
     # → prints: Hello, ASE is cool!
+    ```
+
+---
+
+## 🖥 Quickstart (with Code)
+
+Add the dependency to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+    dart_ase: ^1.1.0
+```
+
+Then use the library in your code:
+
+```dart
+import 'dart:convert';
+import 'dart:io';
+import 'package:dart_ase/src/hybrid/hybrid_pke.dart';
+import 'package:dart_ase/src/io/serialize.dart';
+import 'package:dart_ase/src/io/deserialize.dart';
+import 'package:dart_ase/src/kem/kem.dart';
+import 'package:dart_ase/src/kem/keypair.dart';
+
+Future<void> main() async {
+  // 1. Generate a new keypair
+  final keyPair = keyGen();
+
+  // 2. Encrypt a message using public key
+  final message = "Hello, quantum-resistant encryption!";
+  final encrypted = await encryptString(message, keyPair.pk);
+
+  // 3. Decrypt the message using private key / secret key
+  final decrypted = await decryptString(encrypted, keyPair.sk);
+  print('Decrypted: $decrypted');
+
+  // 4. Save keys and ciphertext to files (optional)
+  File('pubkey.json').writeAsStringSync(serializePublicKey(keyPair.pk));
+  File('ciphertext.json').writeAsStringSync(serializeCombinedCipher(encrypted));
+
+  // 5. Load keys and ciphertext from files (optional)
+  final loadedPk = deserializePublicKey('pubkey.json');
+  final loadedCt = deserializeCombinedCipher('ciphertext.json');
+}
+```
+
+### Core API Methods
+
+-   **Key Generation**: `keyGen()`
+
+    ```dart
+    ASEKeyPair keyPair = keyGen();
+    // keyPair.pk (public key)
+    // keyPair.sk (secret key)
+    ```
+
+-   **Encryption**: `encryptString()`
+
+    ```dart
+    ASECombinedCipher cipher = await encryptString(plaintextString, publicKey);
+    ```
+
+-   **Decryption**: `decryptString()`
+
+    ```dart
+    String plaintext = await decryptString(ciphertext, privateKey);
+    ```
+
+-   **Serialization**: `serializePublicKey()`, `serializeCombinedCipher()`
+
+    ```dart
+    String jsonString = serializePublicKey(publicKey);
+    String jsonString = serializeCombinedCipher(ciphertext);
+    ```
+
+-   **Deserialization**: `deserializePublicKey()`, `deserializeCombinedCipher()`
+
+    ```dart
+    // From file:
+    ASEPublicKey publicKey = deserializePublicKey('path/to/pubkey.json');
+    ASECombinedCipher cipher = deserializeCombinedCipher('path/to/cipher.json');
+
+    // From json string:
+    String jsonString = '{"kemCt":{"u":[[...]],"v":[...]},"nonce":[...],"ciphertext":[...],"salt":[...]}';
+    ASECombinedCipher cipherFromString = deserializeCombinedCipherFromString(jsonString);
+
+    // From parsed json object:
+    Map<String, dynamic> jsonObject = jsonDecode(jsonString);
+    ASECombinedCipher cipherFromJson = deserializeCombinedCipherFromJson(jsonObject);
     ```
 
 ---

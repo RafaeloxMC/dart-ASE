@@ -2,7 +2,13 @@
 
 import 'dart:io';
 import 'dart:convert';
-import '../main.dart';
+import 'package:dart_ase/src/hybrid/hybrid_pke.dart';
+import 'package:dart_ase/src/io/deserialize.dart';
+import 'package:dart_ase/src/io/serialize.dart';
+import 'package:dart_ase/src/kem/kem.dart';
+import 'package:dart_ase/src/kem/keypair.dart';
+import 'package:dart_ase/src/poly/polynominal.dart';
+import 'package:dart_ase/src/poly/polyvec.dart';
 
 Future<void> main() async {
   print('=== Dart ASE Example ===');
@@ -37,7 +43,7 @@ Future<void> main() async {
   final loadedPk = deserializePublicKey('example_pubkey.json');
   final loadedPrivJson =
       jsonDecode(File('example_privkey.json').readAsStringSync());
-  final loadedSk = PrivateKey(PolyVec((loadedPrivJson['s'] as List)
+  final loadedSk = ASEPrivateKey(PolyVec((loadedPrivJson['s'] as List)
       .map((c) => Poly(List<int>.from(c)))
       .toList()));
   final loadedCt = deserializeCombinedCipher('example_ciphertext.json');
