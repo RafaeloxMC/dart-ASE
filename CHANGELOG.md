@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 1.1.0
+
+### General
+
+-   Rearranged project structure
+-   Optimized for pub.dev
+
+### Added
+
+-   Ability to deserialize from Strings
+
 ## Version 1.0.0
 
 ### Added
