@@ -1,8 +1,8 @@
-import 'package:dart_ase/src/constants.dart';
-import 'package:dart_ase/src/kem/keypair.dart';
-import 'package:dart_ase/src/poly/polynominal.dart';
-import 'package:dart_ase/src/poly/polyvec.dart';
-import 'package:dart_ase/src/utils/entropy.dart';
+import 'package:dart_ase/constants.dart';
+import 'package:dart_ase/kem/keypair.dart';
+import 'package:dart_ase/poly/polynominal.dart';
+import 'package:dart_ase/poly/polyvec.dart';
+import 'package:dart_ase/utils/entropy.dart';
 
 ASEKeyPair keyGen() {
   var A = List<PolyVec>.generate(

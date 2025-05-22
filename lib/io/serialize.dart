@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:dart_ase/src/hybrid/hybrid_pke.dart';
-import 'package:dart_ase/src/kem/keypair.dart';
+import 'package:dart_ase/hybrid/hybrid_pke.dart';
+import 'package:dart_ase/kem/keypair.dart';
 
 /// Serializes the public key to JSON format
 String serializePublicKey(ASEPublicKey pk) => jsonEncode({

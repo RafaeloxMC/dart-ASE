@@ -1,5 +1,5 @@
-import 'package:dart_ase/src/constants.dart';
-import 'package:dart_ase/src/poly/polynominal.dart';
+import 'package:dart_ase/constants.dart';
+import 'package:dart_ase/poly/polynominal.dart';
 
 class PolyVec {
   final List<Poly> vec;

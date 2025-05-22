@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 1.1.1
+
+### General
+
+-   Remove lib/src folder and move its contents to lib/
+
 ## Version 1.1.0
 
 ### General

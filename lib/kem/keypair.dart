@@ -1,5 +1,5 @@
-import 'package:dart_ase/src/poly/polynominal.dart';
-import 'package:dart_ase/src/poly/polyvec.dart';
+import 'package:dart_ase/poly/polynominal.dart';
+import 'package:dart_ase/poly/polyvec.dart';
 
 /// This class represents the public key for the ASE KEM scheme.
 /// It contains a list of polynomial vectors A and a polynomial b.

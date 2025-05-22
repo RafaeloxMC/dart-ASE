@@ -1,4 +1,4 @@
-import 'package:dart_ase/src/constants.dart';
+import 'package:dart_ase/constants.dart';
 
 class Poly {
   final List<int> coeffs;

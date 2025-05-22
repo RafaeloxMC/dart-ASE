@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:dart_ase/src/constants.dart';
-import 'package:dart_ase/src/hybrid/hybrid_pke.dart';
-import 'package:dart_ase/src/io/path.dart';
-import 'package:dart_ase/src/kem/keypair.dart';
-import 'package:dart_ase/src/poly/polynominal.dart';
-import 'package:dart_ase/src/poly/polyvec.dart';
+import 'package:dart_ase/constants.dart';
+import 'package:dart_ase/hybrid/hybrid_pke.dart';
+import 'package:dart_ase/io/path.dart';
+import 'package:dart_ase/kem/keypair.dart';
+import 'package:dart_ase/poly/polynominal.dart';
+import 'package:dart_ase/poly/polyvec.dart';
 
 /// Deserializes the public key from a JSON file
 /// The file should contain a JSON object with the keys 'A' and 'b'.

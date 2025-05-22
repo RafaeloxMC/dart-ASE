@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:cryptography/cryptography.dart';
-import 'package:dart_ase/src/constants.dart';
+import 'package:dart_ase/constants.dart';
 
 final aesGcm = AesGcm.with256bits();
 final hkdf = Hkdf(hmac: Hmac.sha256(), outputLength: 32);

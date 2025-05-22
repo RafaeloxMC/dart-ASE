@@ -2,13 +2,13 @@
 
 import 'dart:io';
 import 'dart:convert';
-import 'package:dart_ase/src/hybrid/hybrid_pke.dart';
-import 'package:dart_ase/src/io/deserialize.dart';
-import 'package:dart_ase/src/io/serialize.dart';
-import 'package:dart_ase/src/kem/kem.dart';
-import 'package:dart_ase/src/kem/keypair.dart';
-import 'package:dart_ase/src/poly/polynominal.dart';
-import 'package:dart_ase/src/poly/polyvec.dart';
+import 'package:dart_ase/hybrid/hybrid_pke.dart';
+import 'package:dart_ase/io/deserialize.dart';
+import 'package:dart_ase/io/serialize.dart';
+import 'package:dart_ase/kem/kem.dart';
+import 'package:dart_ase/kem/keypair.dart';
+import 'package:dart_ase/poly/polynominal.dart';
+import 'package:dart_ase/poly/polyvec.dart';
 
 Future<void> main() async {
   print('=== Dart ASE Example ===');
