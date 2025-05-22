@@ -26,6 +26,22 @@ ASEPublicKey deserializePublicKey(String path) {
   }
 
   var m = jsonDecode(file.readAsStringSync());
+  return deserializePublicKeyFromJson(m);
+}
+
+/// Deserializes the public key from a JSON string
+/// The string should contain a JSON object with the keys 'A' and 'b'.
+ASEPublicKey deserializePublicKeyFromString(String jsonString) {
+  var m = jsonDecode(jsonString) as Map<String, dynamic>;
+  if (!m.containsKey('A') || !m.containsKey('b')) {
+    throw FormatException('Invalid public key format');
+  }
+  return deserializePublicKeyFromJson(m);
+}
+
+/// Deserializes the public key from a parsed JSON object
+/// The object should contain the keys 'A' and 'b'.
+ASEPublicKey deserializePublicKeyFromJson(Map<String, dynamic> m) {
   var A = (m['A'] as List)
       .map((pv) => PolyVec(
           (pv as List).map((c) => Poly(List<int>.from(c as List))).toList()))
@@ -33,6 +49,44 @@ ASEPublicKey deserializePublicKey(String path) {
   var bVec =
       (m['b'] as List).map((c) => Poly(List<int>.from(c as List))).toList();
   return ASEPublicKey(A, PolyVec(bVec));
+}
+
+/// Deserializes the private key from a JSON file
+/// The file should contain a JSON object with the key 's'.
+ASEPrivateKey deserializePrivateKey(String path) {
+  if (!isPathSafe(path)) {
+    throw ArgumentError('Unsafe file path');
+  }
+
+  final file = File(path);
+  if (!file.existsSync()) {
+    throw FileSystemException('File not found', path);
+  }
+
+  if (file.lengthSync() > 1024 * 1024) {
+    throw FileSystemException('File too large', path);
+  }
+
+  var m = jsonDecode(file.readAsStringSync());
+  return deserializePrivateKeyFromJson(m);
+}
+
+/// Deserializes the private key from a JSON string
+/// The string should contain a JSON object with the key 's'.
+ASEPrivateKey deserializePrivateKeyFromString(String jsonString) {
+  var m = jsonDecode(jsonString) as Map<String, dynamic>;
+  if (!m.containsKey('s')) {
+    throw FormatException('Invalid private key format');
+  }
+  return deserializePrivateKeyFromJson(m);
+}
+
+/// Deserializes the private key from a parsed JSON object
+/// The object should contain the key 's'.
+ASEPrivateKey deserializePrivateKeyFromJson(Map<String, dynamic> m) {
+  var sVec =
+      (m['s'] as List).map((c) => Poly(List<int>.from(c as List))).toList();
+  return ASEPrivateKey(PolyVec(sVec));
 }
 
 /// Deserializes the combined ciphertext from a JSON file

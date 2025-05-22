@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 1.1.2
+
+### General
+
+-   Reorder tests structure
+
+### Added
+
+-   New tests
+-   Ability to also de-/serialize private & public keys from string and json map
+
 ## Version 1.1.1
 
 ### General

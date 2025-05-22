@@ -9,6 +9,11 @@ String serializePublicKey(ASEPublicKey pk) => jsonEncode({
       'b': pk.b.vec.map((p) => p.coeffs).toList(),
     });
 
+/// Serializes the private key to JSON format
+String serializePrivateKey(ASEPrivateKey sk) => jsonEncode({
+      's': sk.s.vec.map((p) => p.coeffs).toList(),
+    });
+
 /// Deserializes the public key from JSON format
 String serializeCombinedCipher(ASECombinedCipher cc) => jsonEncode({
       'kemCt': {

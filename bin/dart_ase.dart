@@ -10,7 +10,9 @@ import 'package:dart_ase/poly/polyvec.dart';
 
 // === CLI ===
 Future<void> main(List<String> args) async {
-  if (args.isEmpty) return _usage();
+  if (args.isEmpty) {
+    return _usage();
+  }
   switch (args[0]) {
     case 'gen':
       var kp = keyGen();
@@ -20,16 +22,18 @@ Future<void> main(List<String> args) async {
       print('Generated pubkey.json and privkey.json');
       break;
     case 'enc':
-      if (args.length != 3)
+      if (args.length != 3) {
         return stderr.writeln('Usage: enc <pubkey.json> <"plaintext"');
+      }
       var pk = deserializePublicKey(args[1]);
       var cc = await encryptString(args[2], pk);
       File('ciphertext.json').writeAsStringSync(serializeCombinedCipher(cc));
       print('Encrypted to ciphertext.json');
       break;
     case 'dec':
-      if (args.length != 3)
+      if (args.length != 3) {
         return stderr.writeln('Usage: dec <privkey.json> <ciphertext.json>');
+      }
       var priv = jsonDecode(File(args[1]).readAsStringSync());
       var sk = ASEPrivateKey(PolyVec(
           (priv['s'] as List).map((c) => Poly(List<int>.from(c))).toList()));
